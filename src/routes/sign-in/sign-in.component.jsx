@@ -1,0 +1,30 @@
+/** @format */
+import { useEffect } from "react";
+
+import {
+  signInWithGooglePopup,
+  createUserDocumentFromAuth,
+  createAuthUserWithEmailAndPassword,
+} from "../../utils/firebase.utils";
+import SignUpForm from "../../components/sign-up/sign-up-form.component";
+
+const SignIn = () => {
+  const logGoogleUser = async () => {
+    try {
+      const { user } = await signInWithGooglePopup();
+      const userDocRef = await createUserDocumentFromAuth(user);
+    } catch (error) {
+      console.error("Error during popup sign-in:", error);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Sign In</h1>
+      <button onClick={logGoogleUser}>Sign in with Google</button>
+      <SignUpForm />
+    </div>
+  );
+};
+
+export default SignIn;
