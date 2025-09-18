@@ -2,7 +2,7 @@
 
 .cart-dropdown-container {
   position: absolute;
-  width: 240px;
+  width: 280px;
   height: 340px;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,18 @@
     height: 240px;
     display: flex;
     flex-direction: column;
-    overflow: scroll auto;
+    overflow: auto; /* keep scroll functionality */
+
+    /* Hide scrollbar for IE, Edge */
+    -ms-overflow-style: none;
+
+    /* Hide scrollbar for Firefox */
+    scrollbar-width: none;
+  }
+
+  /* Hide scrollbar for Chrome, Safari, Opera */
+  .cart-items::-webkit-scrollbar {
+    display: none;
   }
 
   button {
