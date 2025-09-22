@@ -1,6 +1,6 @@
 /** @format */
 
-import "./category.style.scss";
+import "./category.styles.scss";
 import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { CategoriesContext } from "../../context/categories.context";

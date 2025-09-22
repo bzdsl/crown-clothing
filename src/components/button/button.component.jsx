@@ -1,5 +1,5 @@
 /** @format */
-import "./button.style.scss";
+import "./button.styles.scss";
 const BUTTON_TYPE_CLASSES = {
   google: "google-sign-in",
   inverted: "inverted",

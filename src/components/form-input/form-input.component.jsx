@@ -1,5 +1,5 @@
 /** @format */
-import "./form-input.style.scss";
+import "./form-input.styles.scss";
 const FormInput = ({ label, ...otherProps }) => {
   return (
     <div className="group">
