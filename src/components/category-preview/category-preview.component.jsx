@@ -17,7 +17,6 @@ const CategoryPreview = ({ title, products }) => {
         </Link>
       </Title>
       <Preview>
-        ;
         {products
           .filter((_, idx) => idx < 4)
           .map((product) => (
