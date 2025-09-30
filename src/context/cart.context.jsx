@@ -29,7 +29,7 @@ const cartReducer = (state, action) => {
     case "SET_IS_CART_OPEN":
       return {
         ...state,
-        isCartOpen: payload,
+        ...payload,
       };
 
     default:
@@ -76,9 +76,7 @@ export const CartContext = createContext({
   addItemToCart: () => {},
   removeItemFromCart: () => {},
   clearItemFromCart: () => {},
-  addCartCount: () => {},
   cartCount: 0,
-  total: 0,
 });
 
 export const CartProvider = ({ children }) => {
