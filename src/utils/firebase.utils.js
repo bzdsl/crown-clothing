@@ -33,6 +33,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 
+// eslint-disable-next-line no-unused-vars
 const firebaseApp = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
@@ -75,15 +76,18 @@ export const createUserDocumentFromAuth = async (
   userAuth,
   additionalInformation = {}
 ) => {
-  const useDocRef = doc(db, "users", userAuth.uid);
+  if (!userAuth) return;
 
-  const userSnapShot = await getDoc(useDocRef);
+  const userDocRef = doc(db, "users", userAuth.uid);
 
-  if (!userSnapShot.exists()) {
+  const userSnapshot = await getDoc(userDocRef);
+
+  if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
+
     try {
-      await setDoc(useDocRef, {
+      await setDoc(userDocRef, {
         displayName,
         email,
         createdAt,
@@ -93,9 +97,9 @@ export const createUserDocumentFromAuth = async (
       console.log("error creating the user", error.message);
     }
   }
-  return useDocRef;
-};
 
+  return userSnapshot;
+};
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
@@ -110,3 +114,16 @@ export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};
